@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="58d5dc70a7374c3386e7f1677164c16a" Name="Diagram1">
+        <EntityTypeShape EntityType="Modelo.BACKLOG" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.MILESTONE" Width="1.5" PointX="21.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.PERMISSION" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.PROJECT" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.ROLES" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.SCENARIO" Width="1.5" PointX="16.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.SPRINT" Width="1.5" PointX="12" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.TASK" Width="1.5" PointX="19.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.USER_STORY" Width="1.5" PointX="14.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.USERS" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="Modelo.FK__BACKLOG__PROJECT__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FK__SPRINT__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FK__MILESTONE__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FK__PROJECT__LEADER___7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FL_PID" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FK__USERS__ROLE_TYPE__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FK__SCENARIO__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FK__USER_STORY__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FK__TASK__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.FK__TASK__RESPONSIBL__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="Modelo.ENCAPSULATES" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

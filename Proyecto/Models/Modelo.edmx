@@ -1,0 +1,859 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BACKLOG">
+          <Key>
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="BACKLOG_ID" Type="int" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ENCAPSULATES">
+          <Key>
+            <PropertyRef Name="ROLE_TYPE" />
+            <PropertyRef Name="PERMISSION_ID" />
+          </Key>
+          <Property Name="ROLE_TYPE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PERMISSION_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MILESTONE">
+          <Key>
+            <PropertyRef Name="MILESTONE_ID" />
+            <PropertyRef Name="TASK_ID" />
+            <PropertyRef Name="STORY_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="MILESTONE_ID" Type="int" Nullable="false" />
+          <Property Name="TASK_ID" Type="int" Nullable="false" />
+          <Property Name="STORY_ID" Type="int" Nullable="false" />
+          <Property Name="BACKLOG_ID" Type="int" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="int" Nullable="false" />
+          <Property Name="PROGRESS" Type="int" />
+          <Property Name="DATES" Type="date" />
+        </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="PERMISSION_ID" />
+          </Key>
+          <Property Name="PERMISSION_ID" Type="int" Nullable="false" />
+          <Property Name="DESCRIPTIONS" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="PROJECT">
+          <Key>
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="PROJECT_ID" Type="int" Nullable="false" />
+          <Property Name="STARTING_DATE" Type="date" />
+          <Property Name="FINAL_DATE" Type="date" />
+          <Property Name="DESCRIPTIONS" Type="varchar" MaxLength="100" />
+          <Property Name="PROJECT_NAME" Type="varchar" MaxLength="30" />
+          <Property Name="LEADER_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ROLE_TYPE" />
+          </Key>
+          <Property Name="ROLE_TYPE" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCENARIO">
+          <Key>
+            <PropertyRef Name="NUMBER" />
+            <PropertyRef Name="STORY_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="NUMBER" Type="int" Nullable="false" />
+          <Property Name="STORY_ID" Type="int" Nullable="false" />
+          <Property Name="BACKLOG_ID" Type="int" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="int" Nullable="false" />
+          <Property Name="ACCEPTANCE_CRITERIA" Type="varchar" MaxLength="30" />
+          <Property Name="CONTEXT" Type="varchar" MaxLength="300" />
+          <Property Name="EVENTZ" Type="varchar" MaxLength="300" />
+          <Property Name="RESULT" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="SPRINT">
+          <Key>
+            <PropertyRef Name="SPRINT_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="SPRINT_ID" Type="int" Nullable="false" />
+          <Property Name="BACKLOG_ID" Type="int" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="int" Nullable="false" />
+          <Property Name="STARTING_DATE" Type="date" />
+          <Property Name="FINAL_DATE" Type="date" />
+        </EntityType>
+        <EntityType Name="TASK">
+          <Key>
+            <PropertyRef Name="TASK_ID" />
+            <PropertyRef Name="STORY_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="TASK_ID" Type="int" Nullable="false" />
+          <Property Name="STORY_ID" Type="int" Nullable="false" />
+          <Property Name="RESPONSIBLE_ID" Type="int" />
+          <Property Name="BACKLOG_ID" Type="int" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="int" Nullable="false" />
+          <Property Name="DESCRIPTIONS" Type="varchar" MaxLength="300" />
+          <Property Name="ESTIMATED_TIME" Type="int" />
+        </EntityType>
+        <EntityType Name="USER_STORY">
+          <Key>
+            <PropertyRef Name="STORY_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="STORY_ID" Type="int" Nullable="false" />
+          <Property Name="BACKLOG_ID" Type="int" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="int" Nullable="false" />
+          <Property Name="SPRINT_ID" Type="int" />
+          <Property Name="PRIORITIES" Type="int" />
+          <Property Name="CLIENT_ROLE" Type="varchar" MaxLength="30" />
+          <Property Name="ESTIMATION" Type="int" />
+          <Property Name="REASON" Type="varchar" MaxLength="150" />
+          <Property Name="FUNCTIONALITY" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="USERS_ID" />
+          </Key>
+          <Property Name="USERS_ID" Type="int" Nullable="false" />
+          <Property Name="ROLE_TYPE" Type="varchar" MaxLength="30" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="30" />
+          <Property Name="SURNAME" Type="varchar" MaxLength="30" />
+          <Property Name="LASTNAME" Type="varchar" MaxLength="30" />
+          <Property Name="PASSWORDS" Type="varchar" MaxLength="30" />
+          <Property Name="PROJECT_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK__BACKLOG__PROJECT__7E37BEF6">
+          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="1" />
+          <End Role="BACKLOG" Type="Self.BACKLOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJECT">
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="BACKLOG">
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ENCAPSULA__PERMI__1332DBDC">
+          <End Role="PERMISSION" Type="Self.PERMISSION" Multiplicity="1" />
+          <End Role="ENCAPSULATES" Type="Self.ENCAPSULATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISSION">
+              <PropertyRef Name="PERMISSION_ID" />
+            </Principal>
+            <Dependent Role="ENCAPSULATES">
+              <PropertyRef Name="PERMISSION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ENCAPSULA__ROLE___123EB7A3">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="ENCAPSULATES" Type="Self.ENCAPSULATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ROLE_TYPE" />
+            </Principal>
+            <Dependent Role="ENCAPSULATES">
+              <PropertyRef Name="ROLE_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MILESTONE__0F624AF8">
+          <End Role="TASK" Type="Self.TASK" Multiplicity="1" />
+          <End Role="MILESTONE" Type="Self.MILESTONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TASK">
+              <PropertyRef Name="TASK_ID" />
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="MILESTONE">
+              <PropertyRef Name="TASK_ID" />
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROJECT__LEADER___7A672E12">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USERS_ID" />
+            </Principal>
+            <Dependent Role="PROJECT">
+              <PropertyRef Name="LEADER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SCENARIO__06CD04F7">
+          <End Role="USER_STORY" Type="Self.USER_STORY" Multiplicity="1" />
+          <End Role="SCENARIO" Type="Self.SCENARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_STORY">
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="SCENARIO">
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SPRINT__01142BA1">
+          <End Role="BACKLOG" Type="Self.BACKLOG" Multiplicity="1" />
+          <End Role="SPRINT" Type="Self.SPRINT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BACKLOG">
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="SPRINT">
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TASK__09A971A2">
+          <End Role="USER_STORY" Type="Self.USER_STORY" Multiplicity="1" />
+          <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_STORY">
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="TASK">
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TASK__RESPONSIBL__0A9D95DB">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USERS_ID" />
+            </Principal>
+            <Dependent Role="TASK">
+              <PropertyRef Name="RESPONSIBLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_STORY__03F0984C">
+          <End Role="SPRINT" Type="Self.SPRINT" Multiplicity="0..1" />
+          <End Role="USER_STORY" Type="Self.USER_STORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPRINT">
+              <PropertyRef Name="SPRINT_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="USER_STORY">
+              <PropertyRef Name="SPRINT_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USERS__ROLE_TYPE__778AC167">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="0..1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ROLE_TYPE" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="ROLE_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FL_PID">
+          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="0..1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJECT">
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModeloStoreContainer">
+          <EntitySet Name="BACKLOG" EntityType="Self.BACKLOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ENCAPSULATES" EntityType="Self.ENCAPSULATES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MILESTONE" EntityType="Self.MILESTONE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROJECT" EntityType="Self.PROJECT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SCENARIO" EntityType="Self.SCENARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SPRINT" EntityType="Self.SPRINT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TASK" EntityType="Self.TASK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_STORY" EntityType="Self.USER_STORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BACKLOG__PROJECT__7E37BEF6" Association="Self.FK__BACKLOG__PROJECT__7E37BEF6">
+            <End Role="PROJECT" EntitySet="PROJECT" />
+            <End Role="BACKLOG" EntitySet="BACKLOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ENCAPSULA__PERMI__1332DBDC" Association="Self.FK__ENCAPSULA__PERMI__1332DBDC">
+            <End Role="PERMISSION" EntitySet="PERMISSION" />
+            <End Role="ENCAPSULATES" EntitySet="ENCAPSULATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ENCAPSULA__ROLE___123EB7A3" Association="Self.FK__ENCAPSULA__ROLE___123EB7A3">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="ENCAPSULATES" EntitySet="ENCAPSULATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MILESTONE__0F624AF8" Association="Self.FK__MILESTONE__0F624AF8">
+            <End Role="TASK" EntitySet="TASK" />
+            <End Role="MILESTONE" EntitySet="MILESTONE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROJECT__LEADER___7A672E12" Association="Self.FK__PROJECT__LEADER___7A672E12">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PROJECT" EntitySet="PROJECT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SCENARIO__06CD04F7" Association="Self.FK__SCENARIO__06CD04F7">
+            <End Role="USER_STORY" EntitySet="USER_STORY" />
+            <End Role="SCENARIO" EntitySet="SCENARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SPRINT__01142BA1" Association="Self.FK__SPRINT__01142BA1">
+            <End Role="BACKLOG" EntitySet="BACKLOG" />
+            <End Role="SPRINT" EntitySet="SPRINT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TASK__09A971A2" Association="Self.FK__TASK__09A971A2">
+            <End Role="USER_STORY" EntitySet="USER_STORY" />
+            <End Role="TASK" EntitySet="TASK" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TASK__RESPONSIBL__0A9D95DB" Association="Self.FK__TASK__RESPONSIBL__0A9D95DB">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="TASK" EntitySet="TASK" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_STORY__03F0984C" Association="Self.FK__USER_STORY__03F0984C">
+            <End Role="SPRINT" EntitySet="SPRINT" />
+            <End Role="USER_STORY" EntitySet="USER_STORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USERS__ROLE_TYPE__778AC167" Association="Self.FK__USERS__ROLE_TYPE__778AC167">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FL_PID" Association="Self.FL_PID">
+            <End Role="PROJECT" EntitySet="PROJECT" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BACKLOG">
+          <Key>
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="BACKLOG_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PROJECT" Relationship="Self.FK__BACKLOG__PROJECT__7E37BEF6" FromRole="BACKLOG" ToRole="PROJECT" />
+          <NavigationProperty Name="SPRINT" Relationship="Self.FK__SPRINT__01142BA1" FromRole="BACKLOG" ToRole="SPRINT" />
+        </EntityType>
+        <EntityType Name="MILESTONE">
+          <Key>
+            <PropertyRef Name="MILESTONE_ID" />
+            <PropertyRef Name="TASK_ID" />
+            <PropertyRef Name="STORY_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="MILESTONE_ID" Type="Int32" Nullable="false" />
+          <Property Name="TASK_ID" Type="Int32" Nullable="false" />
+          <Property Name="STORY_ID" Type="Int32" Nullable="false" />
+          <Property Name="BACKLOG_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROGRESS" Type="Int32" />
+          <Property Name="DATES" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TASK" Relationship="Self.FK__MILESTONE__0F624AF8" FromRole="MILESTONE" ToRole="TASK" />
+        </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="PERMISSION_ID" />
+          </Key>
+          <Property Name="PERMISSION_ID" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPTIONS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ROLES" Relationship="Self.ENCAPSULATES" FromRole="PERMISSION" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="PROJECT">
+          <Key>
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="PROJECT_ID" Type="Int32" Nullable="false" />
+          <Property Name="STARTING_DATE" Type="DateTime" Precision="0" />
+          <Property Name="FINAL_DATE" Type="DateTime" Precision="0" />
+          <Property Name="DESCRIPTIONS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROJECT_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LEADER_ID" Type="Int32" />
+          <NavigationProperty Name="BACKLOG" Relationship="Self.FK__BACKLOG__PROJECT__7E37BEF6" FromRole="PROJECT" ToRole="BACKLOG" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK__PROJECT__LEADER___7A672E12" FromRole="PROJECT" ToRole="USERS" />
+          <NavigationProperty Name="USERS1" Relationship="Self.FL_PID" FromRole="PROJECT" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ROLE_TYPE" />
+          </Key>
+          <Property Name="ROLE_TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK__USERS__ROLE_TYPE__778AC167" FromRole="ROLES" ToRole="USERS" />
+          <NavigationProperty Name="PERMISSION" Relationship="Self.ENCAPSULATES" FromRole="ROLES" ToRole="PERMISSION" />
+        </EntityType>
+        <EntityType Name="SCENARIO">
+          <Key>
+            <PropertyRef Name="NUMBER" />
+            <PropertyRef Name="STORY_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="NUMBER" Type="Int32" Nullable="false" />
+          <Property Name="STORY_ID" Type="Int32" Nullable="false" />
+          <Property Name="BACKLOG_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ACCEPTANCE_CRITERIA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CONTEXT" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="EVENTZ" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RESULT" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER_STORY" Relationship="Self.FK__SCENARIO__06CD04F7" FromRole="SCENARIO" ToRole="USER_STORY" />
+        </EntityType>
+        <EntityType Name="SPRINT">
+          <Key>
+            <PropertyRef Name="SPRINT_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="SPRINT_ID" Type="Int32" Nullable="false" />
+          <Property Name="BACKLOG_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="Int32" Nullable="false" />
+          <Property Name="STARTING_DATE" Type="DateTime" Precision="0" />
+          <Property Name="FINAL_DATE" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BACKLOG" Relationship="Self.FK__SPRINT__01142BA1" FromRole="SPRINT" ToRole="BACKLOG" />
+          <NavigationProperty Name="USER_STORY" Relationship="Self.FK__USER_STORY__03F0984C" FromRole="SPRINT" ToRole="USER_STORY" />
+        </EntityType>
+        <EntityType Name="TASK">
+          <Key>
+            <PropertyRef Name="TASK_ID" />
+            <PropertyRef Name="STORY_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="TASK_ID" Type="Int32" Nullable="false" />
+          <Property Name="STORY_ID" Type="Int32" Nullable="false" />
+          <Property Name="RESPONSIBLE_ID" Type="Int32" />
+          <Property Name="BACKLOG_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPTIONS" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ESTIMATED_TIME" Type="Int32" />
+          <NavigationProperty Name="MILESTONE" Relationship="Self.FK__MILESTONE__0F624AF8" FromRole="TASK" ToRole="MILESTONE" />
+          <NavigationProperty Name="USER_STORY" Relationship="Self.FK__TASK__09A971A2" FromRole="TASK" ToRole="USER_STORY" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK__TASK__RESPONSIBL__0A9D95DB" FromRole="TASK" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="USER_STORY">
+          <Key>
+            <PropertyRef Name="STORY_ID" />
+            <PropertyRef Name="BACKLOG_ID" />
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="STORY_ID" Type="Int32" Nullable="false" />
+          <Property Name="BACKLOG_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="Int32" Nullable="false" />
+          <Property Name="SPRINT_ID" Type="Int32" />
+          <Property Name="PRIORITIES" Type="Int32" />
+          <Property Name="CLIENT_ROLE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ESTIMATION" Type="Int32" />
+          <Property Name="REASON" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FUNCTIONALITY" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SCENARIO" Relationship="Self.FK__SCENARIO__06CD04F7" FromRole="USER_STORY" ToRole="SCENARIO" />
+          <NavigationProperty Name="SPRINT" Relationship="Self.FK__USER_STORY__03F0984C" FromRole="USER_STORY" ToRole="SPRINT" />
+          <NavigationProperty Name="TASK" Relationship="Self.FK__TASK__09A971A2" FromRole="USER_STORY" ToRole="TASK" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="USERS_ID" />
+          </Key>
+          <Property Name="USERS_ID" Type="Int32" Nullable="false" />
+          <Property Name="ROLE_TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LASTNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORDS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PROJECT_ID" Type="Int32" />
+          <NavigationProperty Name="PROJECT" Relationship="Self.FK__PROJECT__LEADER___7A672E12" FromRole="USERS" ToRole="PROJECT" />
+          <NavigationProperty Name="PROJECT1" Relationship="Self.FL_PID" FromRole="USERS" ToRole="PROJECT" />
+          <NavigationProperty Name="ROLES" Relationship="Self.FK__USERS__ROLE_TYPE__778AC167" FromRole="USERS" ToRole="ROLES" />
+          <NavigationProperty Name="TASK" Relationship="Self.FK__TASK__RESPONSIBL__0A9D95DB" FromRole="USERS" ToRole="TASK" />
+        </EntityType>
+        <Association Name="FK__BACKLOG__PROJECT__7E37BEF6">
+          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="1" />
+          <End Role="BACKLOG" Type="Self.BACKLOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJECT">
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="BACKLOG">
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SPRINT__01142BA1">
+          <End Role="BACKLOG" Type="Self.BACKLOG" Multiplicity="1" />
+          <End Role="SPRINT" Type="Self.SPRINT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BACKLOG">
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="SPRINT">
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MILESTONE__0F624AF8">
+          <End Role="TASK" Type="Self.TASK" Multiplicity="1" />
+          <End Role="MILESTONE" Type="Self.MILESTONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TASK">
+              <PropertyRef Name="TASK_ID" />
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="MILESTONE">
+              <PropertyRef Name="TASK_ID" />
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROJECT__LEADER___7A672E12">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USERS_ID" />
+            </Principal>
+            <Dependent Role="PROJECT">
+              <PropertyRef Name="LEADER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FL_PID">
+          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="0..1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJECT">
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USERS__ROLE_TYPE__778AC167">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="0..1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ROLE_TYPE" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="ROLE_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SCENARIO__06CD04F7">
+          <End Role="USER_STORY" Type="Self.USER_STORY" Multiplicity="1" />
+          <End Role="SCENARIO" Type="Self.SCENARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_STORY">
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="SCENARIO">
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_STORY__03F0984C">
+          <End Role="SPRINT" Type="Self.SPRINT" Multiplicity="0..1" />
+          <End Role="USER_STORY" Type="Self.USER_STORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPRINT">
+              <PropertyRef Name="SPRINT_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="USER_STORY">
+              <PropertyRef Name="SPRINT_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TASK__09A971A2">
+          <End Role="USER_STORY" Type="Self.USER_STORY" Multiplicity="1" />
+          <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_STORY">
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Principal>
+            <Dependent Role="TASK">
+              <PropertyRef Name="STORY_ID" />
+              <PropertyRef Name="BACKLOG_ID" />
+              <PropertyRef Name="PROJECT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TASK__RESPONSIBL__0A9D95DB">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USERS_ID" />
+            </Principal>
+            <Dependent Role="TASK">
+              <PropertyRef Name="RESPONSIBLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ENCAPSULATES">
+          <End Role="PERMISSION" Type="Self.PERMISSION" Multiplicity="*" />
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BACKLOG" EntityType="Self.BACKLOG" />
+          <EntitySet Name="MILESTONE" EntityType="Self.MILESTONE" />
+          <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" />
+          <EntitySet Name="PROJECT" EntityType="Self.PROJECT" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" />
+          <EntitySet Name="SCENARIO" EntityType="Self.SCENARIO" />
+          <EntitySet Name="SPRINT" EntityType="Self.SPRINT" />
+          <EntitySet Name="TASK" EntityType="Self.TASK" />
+          <EntitySet Name="USER_STORY" EntityType="Self.USER_STORY" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" />
+          <AssociationSet Name="FK__BACKLOG__PROJECT__7E37BEF6" Association="Self.FK__BACKLOG__PROJECT__7E37BEF6">
+            <End Role="PROJECT" EntitySet="PROJECT" />
+            <End Role="BACKLOG" EntitySet="BACKLOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SPRINT__01142BA1" Association="Self.FK__SPRINT__01142BA1">
+            <End Role="BACKLOG" EntitySet="BACKLOG" />
+            <End Role="SPRINT" EntitySet="SPRINT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MILESTONE__0F624AF8" Association="Self.FK__MILESTONE__0F624AF8">
+            <End Role="TASK" EntitySet="TASK" />
+            <End Role="MILESTONE" EntitySet="MILESTONE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROJECT__LEADER___7A672E12" Association="Self.FK__PROJECT__LEADER___7A672E12">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PROJECT" EntitySet="PROJECT" />
+          </AssociationSet>
+          <AssociationSet Name="FL_PID" Association="Self.FL_PID">
+            <End Role="PROJECT" EntitySet="PROJECT" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USERS__ROLE_TYPE__778AC167" Association="Self.FK__USERS__ROLE_TYPE__778AC167">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SCENARIO__06CD04F7" Association="Self.FK__SCENARIO__06CD04F7">
+            <End Role="USER_STORY" EntitySet="USER_STORY" />
+            <End Role="SCENARIO" EntitySet="SCENARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_STORY__03F0984C" Association="Self.FK__USER_STORY__03F0984C">
+            <End Role="SPRINT" EntitySet="SPRINT" />
+            <End Role="USER_STORY" EntitySet="USER_STORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TASK__09A971A2" Association="Self.FK__TASK__09A971A2">
+            <End Role="USER_STORY" EntitySet="USER_STORY" />
+            <End Role="TASK" EntitySet="TASK" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TASK__RESPONSIBL__0A9D95DB" Association="Self.FK__TASK__RESPONSIBL__0A9D95DB">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="TASK" EntitySet="TASK" />
+          </AssociationSet>
+          <AssociationSet Name="ENCAPSULATES" Association="Self.ENCAPSULATES">
+            <End Role="PERMISSION" EntitySet="PERMISSION" />
+            <End Role="ROLES" EntitySet="ROLES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModeloStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="BACKLOG">
+            <EntityTypeMapping TypeName="Modelo.BACKLOG">
+              <MappingFragment StoreEntitySet="BACKLOG">
+                <ScalarProperty Name="BACKLOG_ID" ColumnName="BACKLOG_ID" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MILESTONE">
+            <EntityTypeMapping TypeName="Modelo.MILESTONE">
+              <MappingFragment StoreEntitySet="MILESTONE">
+                <ScalarProperty Name="MILESTONE_ID" ColumnName="MILESTONE_ID" />
+                <ScalarProperty Name="TASK_ID" ColumnName="TASK_ID" />
+                <ScalarProperty Name="STORY_ID" ColumnName="STORY_ID" />
+                <ScalarProperty Name="BACKLOG_ID" ColumnName="BACKLOG_ID" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="PROGRESS" ColumnName="PROGRESS" />
+                <ScalarProperty Name="DATES" ColumnName="DATES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISSION">
+            <EntityTypeMapping TypeName="Modelo.PERMISSION">
+              <MappingFragment StoreEntitySet="PERMISSION">
+                <ScalarProperty Name="PERMISSION_ID" ColumnName="PERMISSION_ID" />
+                <ScalarProperty Name="DESCRIPTIONS" ColumnName="DESCRIPTIONS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROJECT">
+            <EntityTypeMapping TypeName="Modelo.PROJECT">
+              <MappingFragment StoreEntitySet="PROJECT">
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="STARTING_DATE" ColumnName="STARTING_DATE" />
+                <ScalarProperty Name="FINAL_DATE" ColumnName="FINAL_DATE" />
+                <ScalarProperty Name="DESCRIPTIONS" ColumnName="DESCRIPTIONS" />
+                <ScalarProperty Name="PROJECT_NAME" ColumnName="PROJECT_NAME" />
+                <ScalarProperty Name="LEADER_ID" ColumnName="LEADER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLES">
+            <EntityTypeMapping TypeName="Modelo.ROLES">
+              <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="ROLE_TYPE" ColumnName="ROLE_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SCENARIO">
+            <EntityTypeMapping TypeName="Modelo.SCENARIO">
+              <MappingFragment StoreEntitySet="SCENARIO">
+                <ScalarProperty Name="NUMBER" ColumnName="NUMBER" />
+                <ScalarProperty Name="STORY_ID" ColumnName="STORY_ID" />
+                <ScalarProperty Name="BACKLOG_ID" ColumnName="BACKLOG_ID" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="ACCEPTANCE_CRITERIA" ColumnName="ACCEPTANCE_CRITERIA" />
+                <ScalarProperty Name="CONTEXT" ColumnName="CONTEXT" />
+                <ScalarProperty Name="EVENTZ" ColumnName="EVENTZ" />
+                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPRINT">
+            <EntityTypeMapping TypeName="Modelo.SPRINT">
+              <MappingFragment StoreEntitySet="SPRINT">
+                <ScalarProperty Name="SPRINT_ID" ColumnName="SPRINT_ID" />
+                <ScalarProperty Name="BACKLOG_ID" ColumnName="BACKLOG_ID" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="STARTING_DATE" ColumnName="STARTING_DATE" />
+                <ScalarProperty Name="FINAL_DATE" ColumnName="FINAL_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TASK">
+            <EntityTypeMapping TypeName="Modelo.TASK">
+              <MappingFragment StoreEntitySet="TASK">
+                <ScalarProperty Name="TASK_ID" ColumnName="TASK_ID" />
+                <ScalarProperty Name="STORY_ID" ColumnName="STORY_ID" />
+                <ScalarProperty Name="RESPONSIBLE_ID" ColumnName="RESPONSIBLE_ID" />
+                <ScalarProperty Name="BACKLOG_ID" ColumnName="BACKLOG_ID" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="DESCRIPTIONS" ColumnName="DESCRIPTIONS" />
+                <ScalarProperty Name="ESTIMATED_TIME" ColumnName="ESTIMATED_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_STORY">
+            <EntityTypeMapping TypeName="Modelo.USER_STORY">
+              <MappingFragment StoreEntitySet="USER_STORY">
+                <ScalarProperty Name="STORY_ID" ColumnName="STORY_ID" />
+                <ScalarProperty Name="BACKLOG_ID" ColumnName="BACKLOG_ID" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="SPRINT_ID" ColumnName="SPRINT_ID" />
+                <ScalarProperty Name="PRIORITIES" ColumnName="PRIORITIES" />
+                <ScalarProperty Name="CLIENT_ROLE" ColumnName="CLIENT_ROLE" />
+                <ScalarProperty Name="ESTIMATION" ColumnName="ESTIMATION" />
+                <ScalarProperty Name="REASON" ColumnName="REASON" />
+                <ScalarProperty Name="FUNCTIONALITY" ColumnName="FUNCTIONALITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="Modelo.USERS">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="USERS_ID" ColumnName="USERS_ID" />
+                <ScalarProperty Name="ROLE_TYPE" ColumnName="ROLE_TYPE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+                <ScalarProperty Name="PASSWORDS" ColumnName="PASSWORDS" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ENCAPSULATES" TypeName="Modelo.ENCAPSULATES" StoreEntitySet="ENCAPSULATES">
+            <EndProperty Name="PERMISSION">
+              <ScalarProperty Name="PERMISSION_ID" ColumnName="PERMISSION_ID" />
+            </EndProperty>
+            <EndProperty Name="ROLES">
+              <ScalarProperty Name="ROLE_TYPE" ColumnName="ROLE_TYPE" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
