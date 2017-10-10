@@ -43,6 +43,24 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script>
+    $(document).ready(function () {
+    $(".ajax").on("click", function (e) {
+            e.preventDefault();
+            var elementUrl = $(this).attr('href');
+            $.ajax({
+                url: elementUrl,
+                cache: false,
+                success: function (data) {
+                    $('#TargetDiv').html(data);
+                }
+            });
+        });
+    });
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
