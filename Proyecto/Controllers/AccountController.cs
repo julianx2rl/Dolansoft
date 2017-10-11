@@ -68,7 +68,7 @@ namespace Proyecto.Controllers
         public ActionResult Login(Models.USERS userModel)
         {
             Entities db = new Entities();
-            var userDetails = db.USERS.FirstOrDefault(dbUser => dbUser.email == userModel.email && dbUser.password == userModel.password);
+            var userDetails = db.USERS.FirstOrDefault(dbUser => dbUser.EMAIL == userModel.EMAIL && dbUser.PASSWORDS == userModel.PASSWORDS);
             if (userDetails == null)
             {
                 ModelState.AddModelError("", "Ha ocurrido un error ingresando al sistema, trate nuevamente.");
@@ -76,7 +76,7 @@ namespace Proyecto.Controllers
             }
             else
             {
-                Session["userEmail"] = userDetails.email;
+                Session["userEmail"] = userDetails.EMAIL;
                 return RedirectToAction("Index", "Home");
             }
             /*
