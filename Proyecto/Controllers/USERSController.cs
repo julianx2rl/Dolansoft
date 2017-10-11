@@ -16,12 +16,12 @@ namespace Dolansoft.Controllers
         private Entities db = new Entities();
 
         // GET: USERS
-        /*
+       
         public ActionResult Index()
         {
             var uSERS = db.USERS.Include(u => u.PROJECT1).Include(u => u.ROLES);
             return View(uSERS.ToList());
-        }*/
+        }
 
         // GET: USERS/Details/5
         public ActionResult Details(int? id)
@@ -165,7 +165,7 @@ namespace Dolansoft.Controllers
             }
             return v.ToList();
         }
-
+        /*
         public ActionResult Index(int page = 1, string sort = "FirstName", string sortdir = "asc", string search = "")
         {
             int pageSize = 10;
@@ -176,6 +176,6 @@ namespace Dolansoft.Controllers
             ViewBag.TotalRows = totalRecord;
             ViewBag.search = search;
             return View(data);
-        }
+        }.*/
     }
 }
