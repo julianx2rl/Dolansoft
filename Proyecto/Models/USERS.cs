@@ -27,18 +27,23 @@ namespace Proyecto.Models
         [StringLength(11)]
         [Display(Name = "Cédula:")]
         public int USERS_ID { get; set; }
-
+        
+        [Display(Name = "Rol:")]
         public string ROLE_TYPE { get; set; }
 
+        [StringLength(30)]
+        [Display(Name = "Email:")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string EMAIL { get; set; }
 
-        [StringLength(20)]
+        [StringLength(30)]
         [Required(ErrorMessage = "El nombre es un campo requerido.")]
         [Display(Name = "Nombre:")]
         [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El nombre solo puede estar compuesto por letras")]
         public string USERNAME { get; set; }
 
-        [StringLength(20)]
+        [StringLength(30)]
         [Required(ErrorMessage = "El primer apellido es un campo requerido.")]
         [Display(Name = "Primer apellido:")]
         [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El primer apellido solo puede estar compuesto por letras")]
@@ -49,8 +54,14 @@ namespace Proyecto.Models
         [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El segundo apellido solo puede estar compuesto por letras")]
         public string LASTNAME { get; set; }
 
+        [Required(ErrorMessage = "La contraseña es un campo requerido.")]
+        [StringLength(30, ErrorMessage = "La contraseña debe de medir al menos 6 caracteres y maximo 30.", MinimumLength = 6)]
+        [RegularExpression(@"^[a-zA-Z0-9''-'\s]+$", ErrorMessage = "La contraseña tiene caracteres invalidos")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
         public string PASSWORDS { get; set; }
 
+        [Display(Name = "Proyecto asignado:")]
         public Nullable<int> PROJECT_ID { get; set; }
 
         [RegularExpression(@"^[a-zA-Z''-'\s][0-9]+$", ErrorMessage = "El carné no tiene el formato correcto")]
