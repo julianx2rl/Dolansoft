@@ -11,7 +11,8 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class USERS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,15 +21,54 @@ namespace Proyecto.Models
             this.PROJECT = new HashSet<PROJECT>();
             this.TASK = new HashSet<TASK>();
         }
-    
+
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "La cédula solo puede estar compuesta por números")]
+        [Required(ErrorMessage = "La cédula es un campo requerido.")]
+        [StringLength(11)]
+        [Display(Name = "Cédula:")]
         public int USERS_ID { get; set; }
+        
+        [Display(Name = "Rol:")]
         public string ROLE_TYPE { get; set; }
+
+        [StringLength(30)]
+        [Display(Name = "Email:")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string EMAIL { get; set; }
+
+        [StringLength(30)]
+        [Required(ErrorMessage = "El nombre es un campo requerido.")]
+        [Display(Name = "Nombre:")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El nombre solo puede estar compuesto por letras")]
         public string USERNAME { get; set; }
+
+        [StringLength(30)]
+        [Required(ErrorMessage = "El primer apellido es un campo requerido.")]
+        [Display(Name = "Primer apellido:")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El primer apellido solo puede estar compuesto por letras")]
         public string SURNAME { get; set; }
+
+        [StringLength(20)]
+        [Display(Name = "Segundo apellido:")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El segundo apellido solo puede estar compuesto por letras")]
         public string LASTNAME { get; set; }
+
+        [Required(ErrorMessage = "La contraseña es un campo requerido.")]
+        [StringLength(30, ErrorMessage = "La contraseña debe de medir al menos 6 caracteres y maximo 30.", MinimumLength = 6)]
+        [RegularExpression(@"^[a-zA-Z0-9''-'\s]+$", ErrorMessage = "La contraseña tiene caracteres invalidos")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
         public string PASSWORDS { get; set; }
+
+        [Display(Name = "Proyecto asignado:")]
         public Nullable<int> PROJECT_ID { get; set; }
+
+        [RegularExpression(@"^[a-zA-Z''-'\s][0-9]+$", ErrorMessage = "El carné no tiene el formato correcto")]
+        [Required(ErrorMessage = "El carné es un campo requerido.")]
+        [StringLength(10)]
+        [Display(Name = "Carné:")]
+        public Nullable<int> STUDENT_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROJECT> PROJECT { get; set; }

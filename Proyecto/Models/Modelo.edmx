@@ -132,6 +132,7 @@
           <Property Name="LASTNAME" Type="varchar" MaxLength="30" />
           <Property Name="PASSWORDS" Type="varchar" MaxLength="30" />
           <Property Name="PROJECT_ID" Type="int" />
+          <Property Name="STUDENT_ID" Type="int" />
         </EntityType>
         <Association Name="FK__BACKLOG__PROJECT__7E37BEF6">
           <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="1" />
@@ -503,6 +504,7 @@
           <NavigationProperty Name="PROJECT1" Relationship="Self.FL_PID" FromRole="USERS" ToRole="PROJECT" />
           <NavigationProperty Name="ROLES" Relationship="Self.FK__USERS__ROLE_TYPE__778AC167" FromRole="USERS" ToRole="ROLES" />
           <NavigationProperty Name="TASK" Relationship="Self.FK__TASK__RESPONSIBL__0A9D95DB" FromRole="USERS" ToRole="TASK" />
+          <Property Name="STUDENT_ID" Type="Int32" />
         </EntityType>
         <Association Name="FK__BACKLOG__PROJECT__7E37BEF6">
           <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="1" />
@@ -814,6 +816,7 @@
           <EntitySetMapping Name="USERS">
             <EntityTypeMapping TypeName="Modelo.USERS">
               <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
                 <ScalarProperty Name="USERS_ID" ColumnName="USERS_ID" />
                 <ScalarProperty Name="ROLE_TYPE" ColumnName="ROLE_TYPE" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
