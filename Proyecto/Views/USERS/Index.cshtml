@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var grid = new WebGrid(canPage: true, rowsPerPage: 10);
+    grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
 }
 
 <h2>Index</h2>
@@ -10,39 +12,76 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.USERNAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SURNAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LASTNAME)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.USERNAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SURNAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LASTNAME)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.USERS_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.USERS_ID }) |
-            <a href='@Url.Action("Details", new { id=item.USERS_ID })' class="ajax">Details</a>
-        </td>
-    </tr>
-}
+<!DOCTYPE html>
 
-</table>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2>Employees List</h2>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">Search</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    @using (Html.BeginForm("index", "home", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                    {
+                        <div class="form-group">
+                            <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" />
+                        </div>
+                        <button type="submit" value="Search" class="btn btn-success">Search</button>
+                    }
+                </div>
+            </div>
+        </nav>
+        <div>
+            @grid.Table(
+                tableStyle: "table table-responsive table-bordered",
+                columns: grid.Columns(
+                    grid.Column(columnName: "FirstName", header: "First Name"),
+                    grid.Column(columnName: "LastName", header: "Last Name"),
+                    grid.Column(columnName: "EmailID", header: "Email"),
+                    grid.Column(columnName: "City", header: "City"),
+                    grid.Column(columnName: "Country", header: "Country")
+                )
+            )
 
-<div id="TargetDiv"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-small pagination-right")
+                </div>
+            </div>
+
+            @Html.Hidden("dir", grid.SortDirection)
+            @Html.Hidden("col", grid.SortColumn)
+
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            try {
+                var dir = $('#dir').val();
+                var col = $('#col').val();
+                var header = $("th a[href*=" + col + "]");
+                if (dir == "Ascending") {
+                    header.text(header.text() + "  ▲")
+                }
+                if (dir == "Descending") {
+                    header.text(header.text() + "  ▼");
+                }
+
+            } catch (e) {
+
+            }
+        })
+    </script>
+</body>
+</html>
