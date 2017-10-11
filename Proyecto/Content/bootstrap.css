@@ -2493,7 +2493,7 @@ textarea.input-lg {
 
             .btn-link:hover,
             .btn-link:focus {
-                color: #2a6496;
+                color: #b0b1b2;
                 text-decoration: underline;
                 background-color: transparent;
             }
@@ -4702,7 +4702,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
         .navbar-inverse .navbar-brand:hover,
         .navbar-inverse .navbar-brand:focus {
-            color: #c5daff;
+            color: #e0eafc;
             background-color: #2b4e8b;
         }
 
