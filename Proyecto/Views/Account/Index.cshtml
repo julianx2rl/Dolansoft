@@ -1,0 +1,37 @@
+﻿@model Proyecto.Models.USERS
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+        <table class="table">
+            <tr>
+                <td></td>
+                <td style="text-decoration:underline"></td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(ProcessModelInfo => Model.USERNAME)
+                </td>
+                <td>
+                    @Html.EditorFor(ProcessModelInfo => Model.USERNAME)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(ProcessModelInfo => Model.PASSWORDS)
+                </td>
+                <td>
+                    @Html.EditorFor(ProcessModelInfo => Model.PASSWORDS)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="Salvar" value="Entrar" />
+                    <input type="reset" name="Reiniciar" value="Limpiar" />
+                </td>
+            </tr>
+        </table>
